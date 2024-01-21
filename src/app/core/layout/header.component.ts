@@ -19,7 +19,6 @@ import {User} from "../models/user.model";
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    private readonly router: Router,
     private readonly userService: UserService,
   ) {
   }

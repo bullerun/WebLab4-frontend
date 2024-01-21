@@ -1,22 +1,23 @@
 <div class="container mt-5 col-xs-12">
   <div class="row">
     <div class="col-md-6 col-xs-12">
-      <canvas #coordinates style="width: 100%">
+      <canvas #coordinates (mousemove)="onMouseMove($event)" (click)="onClick()" style="width: 100%">
       </canvas>
     </div>
     <div class="col-md-6 col-xs-12">
-      <form class="row g-3 needs-validation" novalidate>
+      <form [formGroup]="coordinateForm" class="row g-3 needs-validation" novalidate>
         <div class="col-12 position-relative">
           <label for="X" class="form-label">Введите значение для X</label>
-          <input type="text" class="form-control" id="X" value="" required>
+          <input formControlName="xCoordinate" type="text" class="form-control" id="X" required>
         </div>
         <div class="col-12 position-relative">
           <label for="Y" class="form-label">Введите значение для Y</label>
-          <input type="text" class="form-control" id="Y" value="" required>
+          <input formControlName="yCoordinate" type="text" class="form-control" id="Y" required>
         </div>
         <div class="col-12 position-relative">
           <label for="R" class="form-label">Введите значение для R</label>
-          <input type="text" class="form-control" id="R" value="" required>
+          <input formControlName="radius" (input)="onChangeR()" type="text" class="form-control" id="R"
+                 required>
         </div>
         <div class="col-12">
           <button class="btn btn-primary" type="submit">Отправить форму</button>

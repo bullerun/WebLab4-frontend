@@ -56,7 +56,7 @@ export default class AuthComponent implements OnInit {
       this.authForm.addControl(
         "email",
         new FormControl("", {
-          validators: [Validators.required],
+          validators: [Validators.required,  Validators.email],
           nonNullable: true,
         }),
       );
