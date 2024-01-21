@@ -1,25 +1,11 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
-// import { UserService } from "../../services/user.service";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
-
-// import { IfAuthenticatedDirective } from "../../../shared/directives/if-authenticated.directive";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 
 @Component({
-  selector: "app-main-page",
+  selector: "app-home-page",
   templateUrl: "./main.component.html",
-  imports: [
-    RouterLinkActive,
-    RouterLink,
-    AsyncPipe,
-    NgIf,
-    NgOptimizedImage,
-    // IfAuthenticatedDirective,
-  ],
   standalone: true,
 })
-export class MainComponent implements AfterViewInit {
-  // currentUser$ = inject(UserService).currentUser;
+export class MainComponent implements OnInit {
   private rValue = 0;
   @ViewChild('coordinates', {static: true}) canvasRef!: ElementRef<HTMLCanvasElement>;
   private ctx!: CanvasRenderingContext2D;
@@ -27,16 +13,18 @@ export class MainComponent implements AfterViewInit {
   private w!: number;
   private h!: number;
 
-  ngAfterViewInit() {
+
+  ngOnInit(): void {
     this.ctx = this.canvasRef.nativeElement.getContext('2d')!;
-    this.canvasRef.nativeElement.width= this.canvasRef.nativeElement.clientWidth;
-    this.w =this.canvasRef.nativeElement.clientWidth;
+    this.canvasRef.nativeElement.width = this.canvasRef.nativeElement.clientWidth;
+    this.w = this.canvasRef.nativeElement.clientWidth;
     this.canvasRef.nativeElement.height = this.canvasRef.nativeElement.width
     this.h = this.canvasRef.nativeElement.height
     this.gradient = this.ctx.createLinearGradient(0, 0, this.w, this.h);
     this.gradient.addColorStop(0, "rgba(255,211,33,0.55)");
     this.drawCoordinatePlane("R");
   }
+
 
   private drawCoordinatePlane(rValueFun: string | number): void {
     if (typeof rValueFun === 'number') {
@@ -136,6 +124,5 @@ export class MainComponent implements AfterViewInit {
     this.ctx.fillText(label2.toString(), this.w / 2 + r / 2 - lineLength, this.h / 2 - lineLength);
     this.ctx.fillText('-' + label1, this.w / 2 - r - lineLength, this.h / 2 - lineLength);
     this.ctx.fillText('-' + label2, this.w / 2 - r / 2 - lineLength, this.h / 2 - lineLength);
-    console.log(this.canvasRef.nativeElement.getContext("2d"))
   }
 }

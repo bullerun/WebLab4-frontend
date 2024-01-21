@@ -17,11 +17,11 @@
         </ul>
 
         <div *ifAuthenticated="false" class="mt-lg-0 d-flex align-items-md-center">
-          <a href="http://localhost:8080/signin" class="btn btn-light mx-2">Login</a>
-          <a href="http://localhost:8080/signup" class="btn btn-primary">Create account</a>
+          <a routerLink="/login" routerLinkActive="active" class="btn btn-light mx-2">Login</a>
+          <a routerLink="/register" routerLinkActive="active" class="btn btn-primary">Create account</a>
         </div>
         <div *ifAuthenticated="true" class="mt-lg-0 d-flex align-items-md-center">
-          <a href="#" class="btn btn-light mx-2">Log out</a>
+          <a (click)="logout()" class="btn btn-light mx-2">Log out</a>
         </div>
       </div>
     </div>

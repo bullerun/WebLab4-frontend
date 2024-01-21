@@ -1,8 +1,9 @@
-import { Component, inject } from "@angular/core";
-// import { UserService } from "../services/user.service";
-import { RouterLink, RouterLinkActive } from "@angular/router";
-import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
-// import { IfAuthenticatedDirective } from "../../shared/directives/if-authenticated.directive";
+import {Component, inject, OnInit} from "@angular/core";
+import {UserService} from "../services/user.service";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
+import {AsyncPipe, NgIf} from "@angular/common";
+import {IfAuthenticatedDirective} from "../../shared/directives/if-authenticated.directive";
+import {User} from "../models/user.model";
 
 @Component({
   selector: "app-layout-header",
@@ -12,11 +13,22 @@ import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
     RouterLink,
     AsyncPipe,
     NgIf,
-    NgOptimizedImage,
-    // IfAuthenticatedDirective,
+    IfAuthenticatedDirective,
   ],
   standalone: true,
 })
-export class HeaderComponent {
-  // currentUser$ = inject(UserService).currentUser;
+export class HeaderComponent implements OnInit {
+  constructor(
+    private readonly router: Router,
+    private readonly userService: UserService,
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.userService.getCurrentUser() as Partial<User>
+  }
+
+  logout(): void {
+    this.userService.logout();
+  }
 }
