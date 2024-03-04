@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getCurrentUser() as Partial<User>
   }
 
   logout(): void {

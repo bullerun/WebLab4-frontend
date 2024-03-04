@@ -19,19 +19,22 @@ export class PointService {
   sendPoint(xCoordinate: number,
             yCoordinate: number,
             radius: number,
-  )
-  {
-    // : Observable<Point []>
+  ): Observable<Point []> {
+
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     // Формируем объект SignUpRequest на основе переданных данных
     const sendPointRequest = {
-      x: xCoordinate,
-      y: yCoordinate,
-      r: radius
+      x: xCoordinate.toFixed(2),
+      y: yCoordinate.toFixed(2),
+      r: radius.toFixed(2)
     };
+
     const body = JSON.stringify(sendPointRequest);
-    console.log(body)
-    this.http.post<Point []>("http://localhost:8080/addpoint", body, {headers}).subscribe(data=>{console.log(data)})
+    return this.http.post<Point []>("http://localhost:8080/addpoint", body, {headers})
+  }
+
+  getAllPoints(): Observable<Point []> {
+    return this.http.get<Point []>("http://localhost:8080/get/points")
   }
 }

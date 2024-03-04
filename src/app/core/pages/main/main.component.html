@@ -1,17 +1,17 @@
-<div class="container mt-5 col-xs-12">
+<div class="container col-xs-12">
   <div class="row">
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-4 col-xs-12 mt-5">
       <canvas #coordinates (mousemove)="onMouseMove($event)" (click)="onClick()" style="width: 100%">
       </canvas>
     </div>
-    <div class="col-md-6 col-xs-12">
-      <form [formGroup]="coordinateForm" class="row g-3 needs-validation" novalidate>
+    <div class="col-md-4 col-xs-12 mt-5">
+      <form [formGroup]="coordinateForm"  (ngSubmit)="submitForm()" class="row g-3 needs-validation" novalidate>
         <div class="col-12 position-relative">
-          <label for="X" class="form-label">Введите значение для X</label>
+          <label for="X" class="form-label">Введите значение для X: <span #xCoordinate></span></label>
           <input formControlName="xCoordinate" type="text" class="form-control" id="X" required>
         </div>
         <div class="col-12 position-relative">
-          <label for="Y" class="form-label">Введите значение для Y</label>
+          <label for="Y" class="form-label">Введите значение для Y: <span #yCoordinate></span></label>
           <input formControlName="yCoordinate" type="text" class="form-control" id="Y" required>
         </div>
         <div class="col-12 position-relative">
@@ -19,11 +19,34 @@
           <input formControlName="radius" (input)="onChangeR()" type="text" class="form-control" id="R"
                  required>
         </div>
-        <div class="col-12">
+        <div class="col-12 justify-content-center">
           <button class="btn btn-primary" type="submit">Отправить форму</button>
         </div>
       </form>
     </div>
+    <div class="scroll col-md-4 col-xs-12 mt-5">
+      <table class="frontTables">
+        <thead>
+        <tr>
+          <th>X</th>
+          <th>Y</th>
+          <th>R</th>
+          <th>Results</th>
+        </tr>
+        </thead>
+        <tbody id="result">
+          @for (point of points; track $index) {
+            <tr>
+              <td>{{ point.x }}</td>
+              <td>{{ point.y }}</td>
+              <td>{{ point.r }}</td>
+              <td>{{ point.result }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+
 

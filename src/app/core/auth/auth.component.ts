@@ -73,11 +73,11 @@ export default class AuthComponent implements OnInit {
           this.authForm.value as { username: string; password: string },
         )
         : this.userService.register(
-        this.authForm.value as {
-          username: string;
-          email: string;
-          password: string;
-        },
+          this.authForm.value as {
+            username: string;
+            email: string;
+            password: string;
+          },
       );
 
     observable.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({

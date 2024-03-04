@@ -72,13 +72,6 @@ export class UserService {
     );
   }
 
-  update(user: Partial<User>): Observable<{ user: User }> {
-    return this.http.put<{ user: User }>("/user", { user }).pipe(
-      tap(({ user }) => {
-        this.currentUserSubject.next(user);
-      })
-    );
-  }
 
   setAuth(user: User): void {
     this.jwtService.saveToken(user.token);
